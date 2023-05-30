@@ -5,9 +5,9 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
 public class UIManager : MonoBehaviour
 {
+    public BallSpawner ballSpawner;
     public HighScoreManager highScoreManager;
     public TMP_InputField nameInputField;
     public Button submitButton;
@@ -23,22 +23,39 @@ public class UIManager : MonoBehaviour
     {
         // Add an event listener for when the button is clicked
         submitButton.onClick.AddListener(EnterHighScore);
+
+        // Add an event listener for when the enter key is hit after typing in the input field
+        nameInputField.onEndEdit.AddListener(delegate { EnterHighScore(); });
+
+        // Set character limit for the input field
+        nameInputField.characterLimit = 16;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            // Show the InputField and Submit Button when the W key is pressed
-            nameInputField.gameObject.SetActive(true);
-            submitButton.gameObject.SetActive(true);
+            // Toggle the visibility of InputField and Submit Button when the W key is pressed
+            ToggleNameInput();
+
+            ballSpawner.canSpawn = false;
+        }
+    }
+
+    public void ToggleNameInput()
+    {
+        nameInputField.gameObject.SetActive(!nameInputField.gameObject.activeSelf);
+        submitButton.gameObject.SetActive(!submitButton.gameObject.activeSelf);
+        if (nameInputField.gameObject.activeSelf)
+        {
+            nameInputField.Select(); // This line gives focus to the InputField
         }
     }
 
     public void EnterHighScore()
     {
         string playerName = nameInputField.text;
-        int playerScore = GameManager.instance.ballCount/* the player's score */;
+        int playerScore = GameManager.instance.ballCount /* the player's score */;
 
         if (highScoreManager.AddHighScore(playerName, playerScore))
         {
