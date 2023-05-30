@@ -12,6 +12,7 @@ public class ScoreZone : MonoBehaviour
     {
         // Get the AudioSource component
         audioSource = GetComponent<AudioSource>();
+
     }
 
 
@@ -35,6 +36,10 @@ public class ScoreZone : MonoBehaviour
 
         // Play the scoring sound
         audioSource.Play();
+
+        // Play flash effect
+        GameManager.instance.FlashEffect();
+
 
         // Add points to the ball count
         GameManager.instance.AddBallCount(GameManager.instance.pointsToAdd);

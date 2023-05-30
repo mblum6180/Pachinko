@@ -5,29 +5,27 @@ using TMPro;
 
 public class HighScoreDisplay : MonoBehaviour
 {
-    // [SerializeField]
-    // private TMP_Text highScoreText;
 
-    // [SerializeField] // Add this line to create a serialized field.
-    // private HighScoreManager highScoreManager; // Add this line to create a reference to the HighScoreManager.
-
-
-    // private void Start()
-    // {
-    //     UpdateHighScoreText();
-    // }
-
-    // private void UpdateHighScoreText()
-    // {
-    //     //HighScoreManager highScoreManager = FindObjectOfType<HighScoreManager>();
-    //     HighScoreManager.HighScoreEntry[] highScores = highScoreManager.GetHighScores().ToArray();
+    public HighScoreManager highScoreManager;
+    public TextMeshProUGUI highScoreText;
         
-    //     string text = "High Scores:\n";
-    //     for (int i = 0; i < highScores.Length; i++)
-    //     {
-    //         text += highScores[i].playerName + ": " + highScores[i].score + "\n";
-    //     }
+    void Start()
+    {
+        UpdateHighScoreText();
+    }
 
-    //     highScoreText.text = text;
-    // }
+
+    void UpdateHighScoreText()
+    {
+        var highScores = highScoreManager.GetHighScores();
+
+        highScoreText.text = "";
+
+        foreach (var highScore in highScores)
+        {
+            highScoreText.text += highScore.playerName + ": " + highScore.score.ToString() + "\n";
+        }
+    }
+
+
 }

@@ -6,6 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public Animator lightFlash; // Animator for the flashing light effect
 
     public int ballCount = 250; // Starting ball count
     public TextMeshProUGUI ballCountText;  // Reference to your TextMeshPro text field
@@ -58,4 +59,18 @@ public class GameManager : MonoBehaviour
         // Increase the ball count and update the UI
         ballCount += ballsToAdd;
     }
+
+    public void FlashEffect()
+{
+    if (lightFlash)
+    {
+        // Play the "Light" animation from the beginning
+        lightFlash.Play("Light", 0, 0f);
+    }
+    else
+    {
+        Debug.LogWarning("No flashAnimator assigned in GameManager!");
+    }
+}
+
 }
