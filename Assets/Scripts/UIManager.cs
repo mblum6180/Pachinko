@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public HighScoreManager highScoreManager;
     public TMP_InputField nameInputField;
     public Button submitButton;
+    public Toggle spawnToggle;  // Add this, reference your UI Toggle
 
     private void Awake()
     {
@@ -29,26 +30,35 @@ public class UIManager : MonoBehaviour
 
         // Set character limit for the input field
         nameInputField.characterLimit = 16;
+
+        // Initialize the Toggle based on the BallSpawner state
+        spawnToggle.isOn = ballSpawner.isSpawning;
+
+        // Add a listener to call your BallSpawner function when the toggle is changed
+        spawnToggle.onValueChanged.AddListener(ballSpawner.ToggleSpawning);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            // Toggle the visibility of InputField and Submit Button when the W key is pressed
-            ToggleNameInput();
-
-            ballSpawner.canSpawn = false;
-        }
+        // if (Input.GetKeyDown(KeyCode.W) && !ballSpawner.canSpawn)
+        // {
+        //     // Toggle the visibility of InputField and Submit Button when the W key is pressed
+        //     ToggleNameInput();
+        // }
     }
 
     public void ToggleNameInput()
     {
-        nameInputField.gameObject.SetActive(!nameInputField.gameObject.activeSelf);
-        submitButton.gameObject.SetActive(!submitButton.gameObject.activeSelf);
-        if (nameInputField.gameObject.activeSelf)
+        if (ballSpawner.canSpawn)
         {
-            nameInputField.Select(); // This line gives focus to the InputField
+            nameInputField.gameObject.SetActive(true);
+            submitButton.gameObject.SetActive(true);
+            if (nameInputField.gameObject.activeSelf)
+            {
+                nameInputField.Select(); // This line gives focus to the InputField
+            }
+
+            ballSpawner.canSpawn = false; // Disable the BallSpawner when entering high score mode
         }
     }
 
@@ -68,6 +78,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            SceneManager.LoadScene("Menu");
             Debug.Log("Failed to add high score. Invalid name.");
         }
     }

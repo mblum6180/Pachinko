@@ -27,6 +27,25 @@ public class BallSpawner : MonoBehaviour
     public float watchdogTimer = 10f;
 
     public float powerCurve = 2f; // Exponential power curve factor. Adjust this in the Inspector.
+    
+    public bool isSpawning = false;
+
+    public void ToggleSpawning(bool isEnabled)
+    {
+        isSpawning = isEnabled;
+        if (isEnabled)
+        {
+            // Start the repeated spawning of balls
+            InvokeRepeating("SpawnRandomBall", 0f, Random.Range(minSpawnInterval, maxSpawnInterval));
+        }
+        else
+        {
+            // Cancel the repeated spawning of balls
+            CancelInvoke("SpawnRandomBall");
+        }
+    }
+
+
 
 
     private AudioSource audioSource;  // Reference to the AudioSource
@@ -46,10 +65,10 @@ public class BallSpawner : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnBall(1);
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     SpawnBall(1);
+        // }
     }
 
     void WatchdogResetCanSpawn()

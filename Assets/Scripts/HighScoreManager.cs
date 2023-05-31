@@ -26,6 +26,7 @@ public class HighScoreManager : MonoBehaviour
     {
         //Resets Prefs for testing
         //PlayerPrefs.DeleteAll();
+        
         highScores = LoadHighScores();
 
         if (highScores.Count == 0)

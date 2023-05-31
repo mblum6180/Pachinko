@@ -51,7 +51,10 @@ public class GameManager : MonoBehaviour
 
     private void UpdateBallCountText()
     {
-        ballCountText.text = "Ball Count: " + ballCount;  // Set the text to display the current ball count
+        if(ballCountText != null && ballCount >= 0)  // Make sure the text field is not null and the ball count is greater than or equal to 0
+            {
+                ballCountText.text = "Balls: " + ballCount;  // Set the text to display the current ball count
+            }
     }
 
      public void AddBallCount(int ballsToAdd)
@@ -61,16 +64,15 @@ public class GameManager : MonoBehaviour
     }
 
     public void FlashEffect()
-{
-    if (lightFlash)
     {
-        // Play the "Light" animation from the beginning
-        lightFlash.Play("Light", 0, 0f);
+        if (lightFlash)
+        {
+            // Play the "Light" animation from the beginning
+            lightFlash.Play("Light", 0, 0f);
+        }
+        else
+        {
+            Debug.LogWarning("No flashAnimator assigned in GameManager!");
+        }
     }
-    else
-    {
-        Debug.LogWarning("No flashAnimator assigned in GameManager!");
-    }
-}
-
 }

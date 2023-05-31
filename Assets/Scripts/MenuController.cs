@@ -54,4 +54,9 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadScene("HighScore");
     }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }
