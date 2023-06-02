@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    public GameManager gameManager;  // Reference to the GameManager
     public BallSpawner ballSpawner;
     public HighScoreManager highScoreManager;
     public TMP_InputField nameInputField;
@@ -26,16 +27,16 @@ public class UIManager : MonoBehaviour
         submitButton.onClick.AddListener(EnterHighScore);
 
         // Add an event listener for when the enter key is hit after typing in the input field
-        nameInputField.onEndEdit.AddListener(delegate { EnterHighScore(); });
+        nameInputField.onSubmit.AddListener(delegate { EnterHighScore(); });
 
         // Set character limit for the input field
         nameInputField.characterLimit = 16;
 
         // Initialize the Toggle based on the BallSpawner state
-        spawnToggle.isOn = ballSpawner.isSpawning;
+        //spawnToggle.isOn = ballSpawner.isSpawning;
 
         // Add a listener to call your BallSpawner function when the toggle is changed
-        spawnToggle.onValueChanged.AddListener(ballSpawner.ToggleSpawning);
+        //spawnToggle.onValueChanged.AddListener(ballSpawner.ToggleSpawning);
     }
 
     private void Update()
@@ -49,17 +50,19 @@ public class UIManager : MonoBehaviour
 
     public void ToggleNameInput()
     {
-        if (ballSpawner.canSpawn)
+        if (GameManager.instance.IsGameOver)
         {
-            nameInputField.gameObject.SetActive(true);
-            submitButton.gameObject.SetActive(true);
-            if (nameInputField.gameObject.activeSelf)
-            {
-                nameInputField.Select(); // This line gives focus to the InputField
-            }
-
-            ballSpawner.canSpawn = false; // Disable the BallSpawner when entering high score mode
+            SceneManager.LoadScene("Menu");
         }
+        else
+        nameInputField.gameObject.SetActive(true);
+        submitButton.gameObject.SetActive(true);
+        if (nameInputField.gameObject.activeSelf)
+        {
+            nameInputField.Select(); // This line gives focus to the InputField
+        }
+        GameManager.instance.IsGameOver = true; // Disable the BallSpawner when entering high score mode
+    
     }
 
     public void EnterHighScore()

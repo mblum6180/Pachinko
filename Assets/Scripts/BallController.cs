@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public float destroyYPosition = -6f;
+    public GameManager gameManager;  // Reference to the GameManager
+
+    public float destroyYPosition = -30f; // The y position at which the ball should be destroyedf;
     public float destroyAfterSeconds = 30f; // The time after which the ball should be destroyed
 
     public float minSpeedForSound = 2f; // Set this to the minimum speed for the sound to play
@@ -117,4 +119,11 @@ public class BallController : MonoBehaviour
             ballRigidbody.AddForce(new Vector2(0.02f, 0.02f), ForceMode2D.Impulse);
         }
     }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.RemoveBallInstance(this.gameObject);
+        GameManager.instance.GameOver();
+    }
+
 }

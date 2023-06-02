@@ -82,23 +82,28 @@ public class BallSpawner : MonoBehaviour
 
     void SpawnRandomBall()
     {
-    SpawnBall(1);
-
+        if (canSpawn)
+        {
+        SpawnBall(1);
         // Reschedule the next call to get a random interval
         CancelInvoke("SpawnRandomBall");
         InvokeRepeating("SpawnRandomBall", Random.Range(minSpawnInterval, maxSpawnInterval), 
                     Random.Range(minSpawnInterval, maxSpawnInterval));
+        }
     }
+
 
     public void SpawnBall(float power)
     {
+        gameManager.PlayerActivity();
         // Check if there are balls remaining
-        if (gameManager.ballCount > 0 && canSpawn)
+        if (gameManager.ballCount > 0 && !gameManager.IsGameOver)
         {
             Vector3 spawnPosition = new Vector3(spawnXPosition, spawnYPosition, spawnZPosition);
         
             // Instantiate the ball and get its Rigidbody2D component
             GameObject ball = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
+            GameManager.instance.ballInstances.Add(ball);
             Rigidbody2D ballRigidbody = ball.GetComponent<Rigidbody2D>();
         
             // If the ball has a Rigidbody2D, apply an impulse force
