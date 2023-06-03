@@ -1,55 +1,43 @@
-# Pachinko 2D Game
+#Pachinko Game
 
-A 2D Pachinko-style game built using Unity. Players launch a ball into the playfield, and the ball interacts with pins and other elements on the board to score points.
+### Video Demo: <https://youtu.be/zbAsq4B92CM>
 
-## Features
+Welcome to the Pachinko Game project! This is a digital re-creation of the popular Japanese mechanical game Pachinko. Built using Unity, this game aims to deliver an engaging and entertaining experience for both die-hard Pachinko fans and new players alike.
 
-- 2D physics-based gameplay
-- Customizable Pachinko board layout
-- Ball launcher with adjustable launch angle and power
-- Scoring system and point multipliers
-- Exciting sound effects and visual feedback
-- User interface displaying score, remaining balls, and other game information
+##Features
 
-## Getting Started
+    Realistic 2D physics-based gameplay: Using Unity's physics engine, we've simulated the unpredictable and fun nature of Pachinko. The balls bounce off pins and interact with the playfield just like they would in a physical Pachinko game.
 
-### Prerequisites
+    Immersive audio and visual effects: To enhance player engagement, we've included exciting sound effects and visual cues. The game tracks and displays the remaining number of balls, which coupled with the sound and visual effects, provide a deeply immersive gameplay experience.
 
-- Unity 2021.1.0 or later (https://unity.com/)
-- A compatible IDE for editing C# scripts, such as Visual Studio (https://visualstudio.microsoft.com/)
+    Adjustable ball launcher: The game features an on-screen slider, allowing players to adjust the launch power for the balls, giving players more control over their game strategy.
 
-### Installation
+    High Score Feature: The game includes a high score feature where scores are randomly generated upon the first play on a new device. These high scores are saved in the preference file and can be viewed from the main menu. Challenge yourself and see if you can beat the high scores!
 
-1. Clone the repository or download the ZIP file and extract it.
-```
-git clone https://github.com/yourusername/Pachinko2DGame.git
-```
+    Authentic Assets: To ensure an authentic Pachinko experience, all image and sound assets used in the game were captured from a real Pachinko machine.
 
-2. Open Unity Hub and click the "Add" button.
+    End Game: The game ends when the player runs out of Pachinko balls. At this point, they will have the opportunity to enter their name in the high score list if their score is high enough.
 
-3. Navigate to the project folder (where you cloned or extracted the repository) and select it.
+##Built With
 
-4. Open the project in Unity by clicking on its name in the Unity Hub projects list.
+    Unity: A powerful cross-platform 3D engine and a user-friendly development environment.
 
-5. Once the project is open, navigate to the "Scenes" folder in the Project window, and double-click the "Main" scene to load it.
+Copyright (c) 2023 Lightly-Salted Production, LLC
 
-6. Press the "Play" button in the Unity editor to test the game.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-## Controls
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-- Adjust the launch angle and power using the on-screen slider or arrow keys.
-- Launch the ball by clicking the "Launch" button or pressing the spacebar.
-
-## Contributing
-
-We welcome contributions to improve the game or fix issues. To contribute, please follow these steps:
-
-1. Fork the repository and create a new branch for your changes.
-2. Make the changes you'd like to contribute and commit them to your branch.
-3. Create a pull request and describe the changes you made.
-
-Please ensure that your code follows the project's coding style and that any new features are documented in the README.md file.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
