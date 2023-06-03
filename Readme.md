@@ -4,23 +4,23 @@
 
 Welcome to the Pachinko Game project! This is a digital re-creation of the popular Japanese mechanical game Pachinko. Built using Unity, this game aims to deliver an engaging and entertaining experience for both die-hard Pachinko fans and new players alike.
 
-##Features
+## Features
 
-    Realistic 2D physics-based gameplay: Using Unity's physics engine, we've simulated the unpredictable and fun nature of Pachinko. The balls bounce off pins and interact with the playfield just like they would in a physical Pachinko game.
+Realistic 2D physics-based gameplay: Using Unity's physics engine, we've simulated the unpredictable and fun nature of Pachinko. The balls bounce off pins and interact with the playfield just like they would in a physical Pachinko game.
 
-    Immersive audio and visual effects: To enhance player engagement, we've included exciting sound effects and visual cues. The game tracks and displays the remaining number of balls, which coupled with the sound and visual effects, provide a deeply immersive gameplay experience.
+Immersive audio and visual effects: To enhance player engagement, we've included exciting sound effects and visual cues. The game tracks and displays the remaining number of balls, which coupled with the sound and visual effects, provide a deeply immersive gameplay experience.
 
-    Adjustable ball launcher: The game features an on-screen slider, allowing players to adjust the launch power for the balls, giving players more control over their game strategy.
+Adjustable ball launcher: The game features an on-screen slider, allowing players to adjust the launch power for the balls, giving players more control over their game strategy.
 
-    High Score Feature: The game includes a high score feature where scores are randomly generated upon the first play on a new device. These high scores are saved in the preference file and can be viewed from the main menu. Challenge yourself and see if you can beat the high scores!
+High Score Feature: The game includes a high score feature where scores are randomly generated upon the first play on a new device. These high scores are saved in the preference file and can be viewed from the main menu. Challenge yourself and see if you can beat the high scores!
 
-    Authentic Assets: To ensure an authentic Pachinko experience, all image and sound assets used in the game were captured from a real Pachinko machine.
+Authentic Assets: To ensure an authentic Pachinko experience, all image and sound assets used in the game were captured from a real Pachinko machine.
 
-    End Game: The game ends when the player runs out of Pachinko balls. At this point, they will have the opportunity to enter their name in the high score list if their score is high enough.
+End Game: The game ends when the player runs out of Pachinko balls. At this point, they will have the opportunity to enter their name in the high score list if their score is high enough.
 
-##Built With
+## Built With
 
-    Unity: A powerful cross-platform 3D engine and a user-friendly development environment.
+Unity: A powerful cross-platform 3D engine and a user-friendly development environment.
 
 Copyright (c) 2023 Lightly-Salted Production, LLC
 
