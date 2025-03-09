@@ -22,7 +22,7 @@ public class PowerLauncher : MonoBehaviour, IPointerDownHandler
 
         if (ballSpawner == null)
         {
-            ballSpawner = FindObjectOfType<BallSpawner>();
+            ballSpawner = FindFirstObjectByType<BallSpawner>();
         }
     }
 

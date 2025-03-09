@@ -23,7 +23,7 @@ public class BallController : MonoBehaviour
     void Awake()
     {
         // Automatically find the BallSpawner in the scene
-        ballSpawner = FindObjectOfType<BallSpawner>();
+        ballSpawner = FindFirstObjectByType<BallSpawner>();
     }
 
     void Start()
@@ -76,7 +76,7 @@ public class BallController : MonoBehaviour
         // Check if the ball hit a pin and is over the minimum speed
         if (collision.gameObject.tag == "Pin")
         {
-            var speed = GetComponent<Rigidbody2D>().velocity.magnitude;
+            var speed = GetComponent<Rigidbody2D>().linearVelocity.magnitude;
 
             if (speed > minSpeedForSound)
             {
