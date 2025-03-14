@@ -6,29 +6,22 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public Animator lightFlash; // Animator for the flashing light effect
-
-    public int ballCount = 250; // Starting ball count
-    public TextMeshProUGUI ballCountText;  // Reference to your TextMeshPro text field
-
-    // Points per ball
-    [SerializeField]
-    public int pointsToAdd = 7;
-
-    public GameObject tooltip;  // Tooltip object
-    private float inactiveTime = 4f;  // How long the player has been inactive before displaying the tooltip; 
-    private bool hasPlayerShot = false;  // Tracks if the player is currently active
-
-    // Add a new list to keep track of all Ball instances
+    public Animator lightFlash;
+    public int ballCount = 250;
+    public TextMeshProUGUI ballCountText;
+    [SerializeField] public int pointsToAdd = 7;
+    public GameObject tooltip;
+    private float inactiveTime = 4f;
+    private bool hasPlayerShot = false;
     public List<GameObject> ballInstances = new List<GameObject>();
-
     public GameObject gameover;
     public bool IsGameOver = false;
 
+    // Camera Adjustment Variables
+    private int previousWidth, previousHeight;
 
     void Awake()
     {
-        // Set up the singleton
         if (instance != null)
         {
             Destroy(gameObject);
@@ -36,65 +29,96 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
-            UpdateBallCountText();  // Initialize the text when the game starts
+            UpdateBallCountText();
         }
-        gameover.SetActive(false);  // Hide the Game Over text when the game starts
+        gameover.SetActive(false);
+        AdjustCameraSize(); // Adjust camera on start
     }
 
     void Update()
     {
         if (Input.GetKey("escape"))
         {
-            // If you are in the editor, this will stop the play mode
             #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
             #else
-            // If you are in a build of your game, this will quit the application
             Application.Quit();
             #endif
         }
 
-        // If the player is inactive
         if (!hasPlayerShot)
         {
-            // Decrease the inactive time
             inactiveTime -= Time.deltaTime;
-
-            //   If the inactive time is less than or equal to 0,
             if (inactiveTime <= 0f)
             {
-                // Show the tooltip
                 tooltip.SetActive(true);
             }
         }
+
+        // Detect resolution changes and adjust the camera
+        if (Screen.width != previousWidth || Screen.height != previousHeight)
+        {
+            AdjustCameraSize();
+            previousWidth = Screen.width;
+            previousHeight = Screen.height;
+        }
     }
+
+void AdjustCameraSize()
+{
+    Camera cam = Camera.main;
+    if (cam == null) return;
+
+    GameObject board = GameObject.Find("Board");
+    GameObject boardLower = GameObject.Find("BoardLower"); // Second object for height
+
+    if (board == null || boardLower == null) return;
+
+    SpriteRenderer boardRenderer = board.GetComponent<SpriteRenderer>();
+    SpriteRenderer boardLowerRenderer = boardLower.GetComponent<SpriteRenderer>();
+
+    if (boardRenderer == null || boardLowerRenderer == null) return;
+
+    float boardWidth = boardRenderer.bounds.size.x;
+    float totalBoardHeight = boardRenderer.bounds.size.y + boardLowerRenderer.bounds.size.y; // Combined height
+    float aspectRatio = (float)Screen.width / Screen.height;
+
+    if (aspectRatio < 1f) // Portrait mode
+    {
+        cam.orthographicSize = (boardWidth / 2) / aspectRatio;
+    }
+    else // Landscape mode
+    {
+        cam.orthographicSize = totalBoardHeight / 2;
+    }
+}
+
+
 
     public void DecreaseBallCount()
     {
         ballCount--;
-        UpdateBallCountText();  // Update the text whenever the ball count changes
+        UpdateBallCountText();
     }
 
     private void UpdateBallCountText()
     {
-        if(ballCountText != null)  // Make sure the text field is not null and the ball count is greater than or equal to 0
-            {
-                ballCountText.text = "Balls: " + ballCount;  // Set the text to display the current ball count
-            }
+        if (ballCountText != null)
+        {
+            ballCountText.text = "Balls: " + ballCount;
+        }
     }
 
-     public void AddBallCount(int ballsToAdd)
+    public void AddBallCount(int ballsToAdd)
     {
-        // Increase the ball count and update the UI
         ballCount += ballsToAdd;
-        UpdateBallCountText();  // Update the text whenever the ball count changes
+        UpdateBallCountText();
     }
 
     public void FlashEffect()
     {
         if (lightFlash)
         {
-            // Play the "Light" animation from the beginning
             lightFlash.Play("Light", 0, 0f);
         }
         else
@@ -105,7 +129,7 @@ public class GameManager : MonoBehaviour
 
     public void RemoveBallInstance(GameObject ball)
     {
-        if(ballInstances.Contains(ball))
+        if (ballInstances.Contains(ball))
         {
             ballInstances.Remove(ball);
         }
@@ -113,7 +137,6 @@ public class GameManager : MonoBehaviour
 
     public void PlayerActivity()
     {
-        // The player has interacted with the game, so set them as active, reset the inactive time, and hide the tooltip
         hasPlayerShot = true;
         inactiveTime = 0;
         tooltip.SetActive(false);
